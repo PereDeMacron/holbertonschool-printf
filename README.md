@@ -2,6 +2,9 @@
     <h1>Print-F Project</h1>
 </div>
 
+![Holberton School Logo](https://techcrunch.com/wp-content/uploads/2015/11/holberton-logo-horizontal.jpg?w=680)
+
+![UBUNTU](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
 ## Description
 
 This project is to recreate the printf function in C with its most important features, it was made in the software development program of [Holberton School](https://www.holbertonschool.fr/).
@@ -16,7 +19,8 @@ $ man ./man_3_printf
 
 ## Flowchart
 
-//Put Image* (imgur)//
+![Flowchart](https://github.com/RaphSchp/TEST/blob/master/Flowchart%20Template.jpg?raw=true)
+
 ## Usage
 
 <details open>
@@ -24,8 +28,12 @@ $ man ./man_3_printf
 
 <br>
 
+```
+#include <stdio.h>
+#include <stdarg.h>
 
-</details>
+int _printf(const char *format, ...);
+```
 
 - - -
 
@@ -35,22 +43,81 @@ $ man ./man_3_printf
 <br>
 
 
-</details>
+$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c
  
  - - -
  
 <details open>
-<summary> <strong> Parameters </strong> </summary>
+<summary> <strong> Supported Conversion Specifiers </strong> </summary>
 
 <br>
 
+* %c : Prints a character.
+* %s : Prints a string of characters.
+* %i & %d : Prints a signed integer in base 10.
+* %% : Prints a literal % character.
 
 </details>
 
 - - -
 
-## Authors
+## Utilisation Exemple
+
+```
+#include <stdio.h>
+
+int _printf(const char *format, ...);
+
+int main() 
+{
+    char ch = 'A';
+    char str[] = "Hello, World!";
+    int num = 42;
+
+    // Test of the %c specifier
+    _printf("Character: %c\n", ch);
+
+    // Test of the %s specifier
+    _printf("String: %s\n", str);
+
+    // Test of the %i specifier
+    _printf("Number: %i\n", num);
+
+    // Test of the %% specifier
+    _printf("Percent sign: %%\n");
+
+    // Test of multiple specifiers in the same string
+    _printf("Character: %c, String: %s, Number: %i\n", ch, str, num);
+
+    // Test with an empty string
+    _printf("Empty string: %s\n", "");
+
+    // Test with a null character (empty string)
+    char empty_str[] = {0};
+    _printf("Empty string: %s\n", empty_str);
+
+    return (0);
+}
+```
+Outpout :
+```
+Character: A
+String: Hello, World!
+Number: 42
+Percent sign: %
+Character: A, String: Hello, World!, Number: 42
+Empty string:
+Empty string:
+
+```
+
+
+## Authors :fist_right::fist_left:
 
 * Raphael Schopfer <a href="https://github.com/RaphSchp" rel="nofollow"><img align="center" alt="github" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="24" /></a>
 * Gary Mirambet <a href="https://github.com/PereDeMacron" rel="nofollow"><img align="center" alt="github" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="24" /></a>
 * C#21 BDX-THO <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" rel="nofollow"><img align="center" alt="heart" src="https://vectorwiki.com/images/a2I5f__heart.svg" height="24" /></a>
+
+## License
+
+This program is distributed under the terms of the Holberton license.
