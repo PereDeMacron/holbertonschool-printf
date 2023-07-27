@@ -19,7 +19,7 @@ $ man ./man_3_printf
 
 ## Flowchart
 
-![Flowchart](https://github.com/RaphSchp/TEST/blob/master/Flowchart%20Template.jpg?raw=true)
+![Flowchart](https://github.com/PereDeMacron/holbertonschool-printf/blob/features/Flowchart%20Template.jpg?raw=true)
 
 ## Usage
 
