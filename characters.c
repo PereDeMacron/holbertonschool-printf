@@ -2,7 +2,7 @@
 #include <stdarg.h>
 
 /**
- * c - Print characters from a formatted string.
+ * characters - Print characters from a formatted string.
  *
  * This function prints characters from a formatted string. It takes a variable
  * number of arguments and supports printing individual characters using the
@@ -15,10 +15,9 @@
 
 int characters(const char *format, ...)
 {
+	int printed_chars = 0;
 	va_list args;
 	va_start(args, format);
-
-	int printed_chars = 0;
 
 	while (*format)
 	{
@@ -26,6 +25,7 @@ int characters(const char *format, ...)
 		{
 			format++;
 			if (*format == 'c')
+
 			{
 				char c = va_arg(args, int);
 				write(1, &c, 1);

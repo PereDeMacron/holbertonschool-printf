@@ -2,7 +2,7 @@
 #include <stdarg.h>
 
 /**
- * s - Print a formatted string with string substitution.
+ * string - Print a formatted string with string substitution.
  *
  * This function prints a formatted string with string substitution. It supports
  * replacing '%s' with a null-terminated string.
@@ -14,13 +14,14 @@
 int string(const char *format, ...)
 {
     va_list args;
+    int printed_chars = 0;
+    const char *str;
+
     va_start(args, format);
 
-    int printed_chars = 0;
-
-    while (*format)
+    for (str = format; str && *str != '\0'; str++)
     {
-        if (*format == 's')
+        if (*str == 's')
         {
             char *str = va_arg(args, char *);
             int len = 0;
@@ -28,15 +29,12 @@ int string(const char *format, ...)
             {
                 len++;
             }
-            write(1, str, len);
-            printed_chars += len;
+            printed_chars += write(1, str, len);
         }
         else
         {
-            write(1, format, 1);
-            printed_chars++;
+            printed_chars += write(1, str, 1);
         }
-        format++;
     }
 
     va_end(args);

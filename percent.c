@@ -13,10 +13,10 @@
 
 int percent(const char *format, ...)
 {
+	int printed_chars = 0;
 	va_list args;
 	va_start(args, format);
 
-	int printed_chars = 0;
 
 	while (*format)
 	{

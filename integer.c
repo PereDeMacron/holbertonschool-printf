@@ -12,12 +12,12 @@
  *
  * Return: The number of characters printed (excluding the null terminator).
  */
-
 int integer(const char *format, ...)
 {
-	int printed_chars = 0;
 	va_list args;
 	const char *str;
+	int printed_chars = 0;
+	int i, j;
 
 	va_start(args, format);
 
@@ -44,11 +44,11 @@ int integer(const char *format, ...)
 					printed_chars += _putchar('+');
 					num *= -1;
 				}
-				while (num_len--)
+				for (i = 0; i < num_len; i++)
 				{
 					int divisor = 1;
 					int digit;
-					for (int i = 0; i < num_len; i++)
+					for (j = 0; j < num_len - i - 1; j++)
 						divisor *= 10;
 					digit = num / divisor;
 					num %= divisor;
@@ -58,14 +58,12 @@ int integer(const char *format, ...)
 			}
 			else
 			{
-				_putchar(*str);
-				printed_chars++;
+				printed_chars += _putchar(*str);
 			}
 		}
 		else
 		{
-			_putchar(*str);
-			printed_chars++;
+			printed_chars += _putchar(*str);
 		}
 	}
 
