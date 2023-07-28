@@ -16,6 +16,7 @@
 
 int decimal(const char *format, ...)
 {
+	char buffer[20];
 	int printed_chars = 0;
 	va_list args;
 	const char *str;
@@ -36,7 +37,6 @@ int decimal(const char *format, ...)
 			else if (*(str + 1) == 'd')
 			{
 				int num = va_arg(args, int);
-				char buffer[20];
 				snprintf(buffer, sizeof(buffer), "%d", num);
 				for (p = buffer; *p != '\0'; p++)
 				{
