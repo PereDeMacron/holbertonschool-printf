@@ -1,13 +1,12 @@
 #include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>
 
-int d (const char *format, ...)
+int d(const char *format, ...)
 {
     int printed_chars = 0;
     va_list args;
     const char *str;
+    char buffer[20];
+    char *p;
 
     va_start(args, format);
 
@@ -24,12 +23,28 @@ int d (const char *format, ...)
             else if (*(str + 1) == 'd')
             {
                 int num = va_arg(args, int);
-                char buffer[20];
+                int num_len = 1;
+                int temp = num;
+
+                if (num < 0)
+                {
+                    num_len++;
+                    num *= -1;
+                }
+
+                while (temp)
+                {
+                    temp /= 10;
+                    num_len++;
+                }
+
                 snprintf(buffer, sizeof(buffer), "%d", num);
-                for (char *p = buffer; *p != '\0'; p++)
+                p = buffer;
+                while (*p != '\0')
                 {
                     _putchar(*p);
                     printed_chars++;
+                    p++;
                 }
                 str++;
             }

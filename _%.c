@@ -2,25 +2,25 @@
 
 int percent(const char *format, ...)
 {
+    int printed_chars = 0;
+
     va_list args;
     va_start(args, format);
 
-    int printed_chars = 0;
-
-    while (*format) 
+    while (*format)
     {
-        if (*format == '%') 
+        if (*format == '%')
         {
             format++;
-            if (*format == '%') 
+            if (*format == '%')
             {
-                write(1, format, 1);
+                _putchar('%');
                 printed_chars++;
             }
-        } 
-        else 
+        }
+        else
         {
-            write(1, format, 1);
+            _putchar(*format);
             printed_chars++;
         }
         format++;

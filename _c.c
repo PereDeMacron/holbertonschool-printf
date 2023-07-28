@@ -1,29 +1,25 @@
-#include <unistd.h>
-#include <stdarg.h>
+#include "main.h"
 
-int c (const char *format, ...)
+int c(const char *format, ...)
 {
     va_list args;
+    int printed_chars = 0;
     va_start(args, format);
 
-    int printed_chars = 0;
 
-    while (*format) 
+    while (*format)
     {
-        if (*format == '%') 
+        if (*format == '%')
         {
             format++;
-            if (*format == 'c') 
+            if (*format == 'c')
             {
                 char c = va_arg(args, int);
                 write(1, &c, 1);
                 printed_chars++;
             }
-
-                
-
         }
-        else 
+        else
         {
             write(1, format, 1);
             printed_chars++;

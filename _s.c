@@ -1,23 +1,18 @@
-#include <unistd.h>
-#include <stdarg.h>
+#include "main.h"
+#include <string.h>
 
-int s (const char *format, ...)
+int s(const char *format, ...)
 {
     va_list args;
-    va_start(args, format);
-
     int printed_chars = 0;
+    va_start(args, format);
 
     while (*format)
     {
         if (*format == 's')
         {
             char *str = va_arg(args, char *);
-            int len = 0;
-            while (str[len])
-            {
-                len++;
-            }
+            int len = strlen(str);
             write(1, str, len);
             printed_chars += len;
         }
