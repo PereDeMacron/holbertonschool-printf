@@ -27,6 +27,11 @@ int _putchar(char c)
  */
 int _printf(const char *format, ...)
 {
+	if (format == NULL) {
+		// Handle the case when the format string is NULL
+		return -1;
+	}
+
 	va_list args;
 	int printed_chars = 0;
 	const char *str;
@@ -34,7 +39,7 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	for (str = format; str && *str != '\0'; str++)
+	for (str = format; *str != '\0'; str++)
 	{
 		if (*str == '%')
 		{
