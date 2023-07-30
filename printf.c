@@ -17,7 +17,7 @@ int _putchar(char c)
 /**
  * _printf - Print formatted output with variable arguments.
  *
- * This function prints formatted output with variable arguments. It supports
+ * This function prints formatted output with variable arguments. It supportss
  * replacing '%d' or '%i' with an integer value, '%s' with a null-terminated string,
  * '%c' with a character, and '%%' with a literal '%'.
  *
@@ -27,11 +27,6 @@ int _putchar(char c)
  */
 int _printf(const char *format, ...)
 {
-	if (format == NULL) {
-		// Handle the case when the format string is NULL
-		return -1;
-	}
-
 	va_list args;
 	int printed_chars = 0;
 	const char *str;
@@ -39,44 +34,46 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	for (str = format; *str != '\0'; str++)
+	for (str = format; str && *str != '\0'; str++)
 	{
 		if (*str == '%')
 		{
 			switch (*(str + 1))
 			{
-				case 'd':
-				case 'i':
+			case 'd':
+			case 'i':
+			{
+				int value = va_arg(args, int);
+				char buffer[20];
+				snprintf(buffer, sizeof(buffer), "%d", value);
+				for (p = buffer; *p != '\0'; p++)
 				{
-					int value = va_arg(args, int);
-					char buffer[20];
-					snprintf(buffer, sizeof(buffer), "%d", value);
-					for (p = buffer; *p != '\0'; p++)
-					{
-						printed_chars += _putchar(*p);
-					}
-					break;
+					printed_chars += _putchar(*p);
 				}
-				case 's':
+				break;
+			}
+			case 's':
+			{
+				char *value = va_arg(args, char *);
+				if (value == NULL)
+					value = "(null)";
+				for (p = value; *p != '\0'; p++)
 				{
-					char *value = va_arg(args, char*);
-					for (p = value; *p != '\0'; p++)
-					{
-						printed_chars += _putchar(*p);
-					}
-					break;
+					printed_chars += _putchar(*p);
 				}
-				case 'c':
-				{
-					char value = (char)va_arg(args, int);
-					printed_chars += _putchar(value);
-					break;
-				}
-				case '%':
-					printed_chars += _putchar('%');
-					break;
-				default:
-					break;
+				break;
+			}
+			case 'c':
+			{
+				char value = (char)va_arg(args, int);
+				printed_chars += _putchar(value);
+				break;
+			}
+			case '%':
+				printed_chars += _putchar('%');
+				break;
+			default:
+				break;
 			}
 			str++;
 		}

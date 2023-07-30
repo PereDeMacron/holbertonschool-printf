@@ -12,7 +12,6 @@
  *
  * Return: The number of characters printed (excluding the null terminator).
  */
-
 int characters(const char *format, ...)
 {
 	int printed_chars = 0;
@@ -25,11 +24,9 @@ int characters(const char *format, ...)
 		{
 			format++;
 			if (*format == 'c')
-
 			{
-				char c = va_arg(args, int);
+				char c = (char)va_arg(args, int);
 				write(1, &c, 1);
-
 				printed_chars++;
 			}
 		}

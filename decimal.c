@@ -4,19 +4,24 @@
 #include <stdio.h>
 
 /**
- * decimal - Print formatted output with integer substitution.
+ * decimal - Custom print function that prints formatted output to the standard output,
+ *           supporting the %d format specifier for integers.
  *
- * This function prints formatted output with integer substitution. It supports
- * printing '%' character as a literal and replacing '%d' with an integer value.
+ * @format: A pointer to a format string containing the text to be printed, along with
+ *          optional format specifiers.
+ * @...   : Variable arguments list, corresponding to the format specifiers in the
+ *          format string. Currently, only integers are supported (%d).
  *
- * @format: The formatted string to print.
+ * Return: The number of characters printed to the standard output.
  *
- * Return: The number of characters printed (excluding the null terminator).
+ * Note: This function should be used with care and not as a replacement for the standard
+ *       printf function, as it has limited functionality and only supports a subset of
+ *       format specifiers. It is mainly intended for demonstration purposes or when
+ *       advanced formatting is not required.
  */
 
 int decimal(const char *format, ...)
 {
-	char buffer[20];
 	int printed_chars = 0;
 	va_list args;
 	const char *str;
@@ -37,6 +42,7 @@ int decimal(const char *format, ...)
 			else if (*(str + 1) == 'd')
 			{
 				int num = va_arg(args, int);
+				char buffer[20];
 				snprintf(buffer, sizeof(buffer), "%d", num);
 				for (p = buffer; *p != '\0'; p++)
 				{
@@ -59,6 +65,5 @@ int decimal(const char *format, ...)
 	}
 
 	va_end(args);
-
-	return (printed_chars);
+	return printed_chars;
 }

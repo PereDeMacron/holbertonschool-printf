@@ -1,35 +1,51 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
-
 /**
- * integer - Print a formatted output with integer substitution.
+ * integer - Custom print function that prints formatted
+ *  output to the standard output,
+ * supporting the %i format specifier for integers.
+ * @format: A pointer to a format string containing
+ *  the text to be printed, along with
+ *  optional format specifiers.
+ * @...   : Variable arguments list, corresponding to
+ * the format specifiers in the
+ *  format string. Currently, only integers are supported (%i).
  *
- * This function prints a formatted output with integer substitution. It supports
- * replacing '%i' with an integer value and handles both positive and negative numbers.
- *
- * @format: The formatted string to print.
- *
- * Return: The number of characters printed (excluding the null terminator).
+ * Return: The number of characters printed to the standard output.
+ * Note: This function behaves similarly to printf, but with limited functionality. It
+ *       supports the %i format specifier for printing
+ * integers. The function calculates
+ *       the number of digits in the integer and prints
+ * it digit by digit. If the integer
+ *       is negative, it will be printed with a leading '+' sign.
+ *  The function is mainly
+ *       intended for demonstration purposes
+ * or when advanced formatting is not required.
  */
 int integer(const char *format, ...)
 {
 	va_list args;
-	const char *str;
 	int printed_chars = 0;
-	int i, j;
 
 	va_start(args, format);
 
-	for (str = format; str && *str != '\0'; str++)
+	while (*format)
 	{
-		if (*str == '%')
+		if (*format == '%')
 		{
-			if (*(str + 1) == 'i')
+			format++;
+			if (*format == '%')
+			{
+				_putchar('%');
+				printed_chars++;
+			}
+			else if (*format == 'i')
 			{
 				int num = va_arg(args, int);
 				int num_len = 1;
 				int temp = num;
+				int i, j;
 
 				if (num < 0)
 				{
@@ -41,9 +57,10 @@ int integer(const char *format, ...)
 
 				if (num < 0)
 				{
-					printed_chars += _putchar('+');
+					_putchar('+');
 					num *= -1;
 				}
+
 				for (i = 0; i < num_len; i++)
 				{
 					int divisor = 1;
@@ -54,20 +71,20 @@ int integer(const char *format, ...)
 					num %= divisor;
 					printed_chars += _putchar('0' + digit);
 				}
-				str++;
+				format++;
 			}
 			else
 			{
-				printed_chars += _putchar(*str);
+				printed_chars += _putchar(*format);
 			}
 		}
 		else
 		{
-			printed_chars += _putchar(*str);
+			printed_chars += _putchar(*format);
 		}
+		format++;
 	}
 
 	va_end(args);
-
-	return (printed_chars);
+	return printed_chars;
 }

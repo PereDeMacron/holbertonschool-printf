@@ -13,30 +13,30 @@
  */
 int string(const char *format, ...)
 {
-    va_list args;
-    int printed_chars = 0;
-    const char *str;
+	va_list args;
+	int printed_chars = 0;
+	const char *str;
 
-    va_start(args, format);
+	va_start(args, format);
 
-    for (str = format; str && *str != '\0'; str++)
-    {
-        if (*str == 's')
-        {
-            char *str = va_arg(args, char *);
-            int len = 0;
-            while (str[len])
-            {
-                len++;
-            }
-            printed_chars += write(1, str, len);
-        }
-        else
-        {
-            printed_chars += write(1, str, 1);
-        }
-    }
+	for (str = format; str && *str != '\0'; str++)
+	{
+		if (*str == 's')
+		{
+			char *str = va_arg(args, char *);
+			int len = 0;
+			while (str[len])
+			{
+				len++;
+			}
+			printed_chars += write(1, str, len);
+		}
+		else
+		{
+			printed_chars += write(1, str, 1);
+		}
+	}
 
-    va_end(args);
-    return (printed_chars);
+	va_end(args);
+	return (printed_chars);
 }
